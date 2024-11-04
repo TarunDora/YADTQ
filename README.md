@@ -13,5 +13,5 @@ Week 2 objectives:
 -> Implement heartbeat
 
 Week 3 objectives:
--> mplement fault-tolerance, to re-run the failed task.
+-> Implement fault-tolerance, to re-run the failed task.
 -> Testing
