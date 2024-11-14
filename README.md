@@ -63,5 +63,3 @@ To run this project, ensure you have the following installed:
     This example sends a request to add 10 and 20. Similarly, you can use `sub` for subtraction tasks.
 
 ---
-
-This setup should get you started with running and interacting with the distributed task queue. Feel free to explore further or add new functionalities to suit your project's needs!
