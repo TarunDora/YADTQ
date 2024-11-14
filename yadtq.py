@@ -33,6 +33,28 @@ class YADTQ:
         return KafkaConsumer(
             'TaskQueue',
             bootstrap_servers=[self.kafka_server],
-            group_id='worker-group',
+            group_id='worker_group',
             value_deserializer=lambda v: json.loads(v.decode('utf-8'))
         )
+    
+    def check_worker_health(self):
+        #Checks the heartbeat status of each worker
+        workers = self.redis_client.keys("worker:*:heartbeat")
+        
+        if not len(workers):
+            print("No workers available right now")
+
+        current_time = int(time.time())
+        health_status = {}
+        
+        for worker in workers:
+            last_heartbeat = int(self.redis_client.get(worker))
+            worker_id = worker.split(":")[1] # get the worker id
+            # If the last heartbeat is older than 10 seconds, mark as unresponsive
+            if current_time - last_heartbeat > 15:
+                health_status[worker_id] = "unresponsive"
+            else:
+                health_status[worker_id] = "healthy"
+        
+        return health_status
+
