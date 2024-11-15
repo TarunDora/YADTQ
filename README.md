@@ -32,6 +32,15 @@ To run this project, ensure you have the following installed:
     # Install Redis Python client
     pip install redis
     ```
+3. **Create a Kafka Topic with at Least 3 Partitions**
+
+    Run the following command to create a Kafka topic named `TaskQueue` with 3 partitions:
+
+    ```bash
+    kafka-topics.sh --create --topic TaskQueue --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1
+    ```
+
+    > **Note:** Adjust `--bootstrap-server` if your Kafka server is running on a different host or port. Also, change `--replication-factor` based on your desired replication settings. For N worker nodes in parallel there should be atleast N partitions
 
 ---
 
