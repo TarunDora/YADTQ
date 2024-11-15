@@ -64,7 +64,7 @@ To run this project, ensure you have the following installed:
 
 3. **Send a Task to Worker Nodes**
 
-    To send a task, such as adding two numbers, use the `client.py` script with the following syntax:
+    To send a task, such as finding simple interest, use the `client.py` script with the following syntax:
     ```bash
     python client.py si [1000,5,2]
     ```
