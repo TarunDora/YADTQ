@@ -11,14 +11,29 @@ def send_heartbeat(worker_id, queue):
 
 def process_task(task):
     # Define the task types the worker can process
-    if task['type'] == "add":
-        res = int(task['args'][0]) + int(task['args'][1])
-        time.sleep(15)
-        return res
-    elif task['type'] == "sub":
-        res = int(task['args'][0]) - int(task['args'][1])
-        time.sleep(15)
-        return res
+    if task['type'] == "si":
+        # Format: principal, rate, time
+        principal, rate, T = map(float, task['args'])
+        res = (principal * rate * T) / 100
+        time.sleep(25)
+        return round(res,2)
+    
+    elif task['type'] == "ci":
+        # Format: principal, rate, time
+        principal, rate, T = map(float, task['args'])
+        res = principal * ((1 + rate / 100) ** T)
+        time.sleep(25)
+        return round(res,2)
+    
+    elif task['type'] == "emi":
+        # Format: loan_amount, annual_rate, tenure_years
+        loan_amount, annual_rate, tenure_years = map(float, task['args'])
+        monthly_rate = annual_rate / (12 * 100)
+        tenure_months = int(tenure_years * 12)
+        res = (loan_amount * monthly_rate * (1 + monthly_rate) ** tenure_months) / ((1 + monthly_rate) ** tenure_months - 1)
+        time.sleep(25)
+        return round(res,2)
+
     else:
         raise ValueError("Unknown task type")
 
