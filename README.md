@@ -66,9 +66,16 @@ To run this project, ensure you have the following installed:
 
     To send a task, such as adding two numbers, use the `client.py` script with the following syntax:
     ```bash
-    python client.py add [10, 20]
+    python client.py si [1000,5,2]
     ```
 
-    This example sends a request to add 10 and 20. Similarly, you can use `sub` for subtraction tasks.
+    This example sends a request to find the simple interest. Similarly, you can use `--help` for available tasks tasks.
+
+4. **Check status of a task**
+
+   To check status of a task run the following command:
+   ```bash
+    python client.py -s task-*
+    ```
 
 ---
