@@ -69,7 +69,7 @@ To run this project, ensure you have the following installed:
     python client.py si [1000,5,2]
     ```
 
-    This example sends a request to find the simple interest. Similarly, you can use `--help` for available tasks tasks.
+    This example sends a request to find the simple interest. Similarly, you can use `--help` for available tasks.
 
 4. **Check status of a task**
 
