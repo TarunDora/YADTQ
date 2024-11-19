@@ -30,32 +30,39 @@ def main():
 
     if sys.argv[-1] == "--help":
         print("Commands are:")
-        print("si [P(₹),R(%),T(yrs)]  -> calculates simple interest")
-        print("ci [P(₹),R(%),T(yrs)]  -> calculates compound interest")
+        print("si [P(₹),R(%),T(yrs)]   -> calculates simple interest")
+        print("ci [P(₹),R(%),T(yrs)]   -> calculates compound interest")
         print("emi [P(₹),R(%),T(yrs)]  -> calculates simple interest")
-        print("-s [task_id]  -> check task status by ID")
-        print("-h            -> check worker health")
+        print("-s [task_id]            -> check task status by ID")
+        print("-h                      -> check worker health")
         exit()
 
     comm = sys.argv[-2]
     #print(comm)
     #print(sys.argv[-1],type(sys.argv[-1]))
-    params = json.loads((sys.argv[-1]))
-    #params = sys.argv[-1]
+    try:
+        params = json.loads((sys.argv[-1]))
+    except:
+        print("Invalid syntax")
+        exit()
 
     # Send a task
-    task_id = queue.send_task(comm, params)
-    print(f"Client sent task with ID: {task_id}")
-    
-    # Check task status
-    while True:
-        status = queue.get_task_status(task_id)
-        print(f"Task status: {status}")
+    try:
+        task_id = queue.send_task(comm, params)
+        print(f"Client sent task with ID: {task_id}")
         
-        if status["status"] in ["success", "failed"]:
-            print("Final result:", status)
-            break
-        time.sleep(2)
+        # Check task status (done only for demonstration purposes. Can delete the below code if needed)
+        while True:
+            status = queue.get_task_status(task_id)
+            print(f"Task status: {status}")
+            
+            if status["status"] in ["success", "failed"]:
+                print("Final result:", status)
+                break
+            time.sleep(2)
+    except:
+        print("Check if Kafka and Redis servers are running")
+        exit()
 
 if __name__ == "__main__":
     main()
