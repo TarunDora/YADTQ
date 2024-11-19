@@ -72,10 +72,10 @@ To run this project, ensure you have the following installed:
 
     To send a task, such as finding simple interest, use the `client.py` script with the following syntax:
     ```bash
-    python client.py -m si [1000,5,2] for individual processing
+    python client.py -m si [1000,5,2] # for individual processing
     ```
     ```bash
-    python client.py si [1000,5,2] for batch processing
+    python client.py si [1000,5,2] # for batch processing
     ```
 
     This example sends a request to find the simple interest. Similarly, you can use `--help` for available tasks.
