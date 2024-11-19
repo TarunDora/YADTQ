@@ -2,6 +2,8 @@ from yadtq import YADTQ
 import time
 import sys
 import threading
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 file_name = "log.txt"
 

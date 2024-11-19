@@ -50,21 +50,31 @@ def main():
 
     # Send a task
     try:
-        for i in range(10):
+        if sys.argv[-3] == "-m":
             task_id = queue.send_task(comm, params)
             print(f"Client sent task with ID: {task_id}")
-            time.sleep(1)
+            
             with open(file_name, "a") as file:  # Append mode to retain previous logs
                 file.write(f"Client sent task with ID: {task_id}\n")
-        # Check task status (done only for demonstration purposes. Can delete the below code if needed)
-        # while True:
-        #     status = queue.get_task_status(task_id)
-        #     print(f"Task status: {status}")
-            
-        #     if status["status"] in ["success", "failed"]:
-        #         print("Final result:", status)
-        #         break
-        #     time.sleep(2)
+
+            while True:
+                status = queue.get_task_status(task_id)
+                print(f"Task status: {status}")
+                
+                if status["status"] in ["success", "failed"]:
+                    print("Final result:", status)
+                    break
+                time.sleep(2)
+
+        else:
+            for i in range(10):
+                task_id = queue.send_task(comm, params)
+                print(f"Client sent task with ID: {task_id}")
+                time.sleep(1)
+                with open(file_name, "a") as file:  # Append mode to retain previous logs
+                    file.write(f"Client sent task with ID: {task_id}\n")
+        
+        
     except:
         print("Check if Kafka and Redis servers are running")
         exit()
