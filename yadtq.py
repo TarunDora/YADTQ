@@ -2,6 +2,7 @@ from kafka import KafkaProducer, KafkaConsumer
 import redis
 import json
 import time
+import uuid
 
 class YADTQ:
     def __init__(self, kafka_server='localhost:9092', redis_host='localhost', redis_port=6379):
@@ -13,7 +14,8 @@ class YADTQ:
         self.kafka_server = kafka_server
 
     def send_task(self, task_type, args):
-        task_id = f"task-{int(time.time())}"
+        #task_id = f"task-{int(time.time())}"
+        task_id = f"task-{(str(uuid.uuid4()))[-1:-6:-1]}"
         task_data = {
             "id": task_id,
             "type": task_type,
