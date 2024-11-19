@@ -5,9 +5,9 @@ A distributed task queue implemented with Kafka and Redis, designed for efficien
 ## Team Members
 
 - Srihari Krishna
-- Srilakshmana Amaresh M
-- Tarun Kumar D
-- Zhenkar P Gowda
+- Srilakshmana Amaresh Mandavilli
+- Tarun Kumar Dora
+- Zhenkar Gowda K P
 
 ---
 
@@ -48,21 +48,24 @@ To run this project, ensure you have the following installed:
 
 1. **Start the Worker Nodes**
 
-    This repository contains three worker files: `worker1.py`, `worker2.py`, and `worker3.py`. To add your own worker files, ensure that the filename ends with an integer. 
+    This repository contains one worker file: `worker.py`. To run the worker files follow the worker.py file with the worker's id like 1,2 or 3 etc 
 
-    - Examples of valid filenames: `worker1.py`, `c1.py`, `file4.py`
-    - Examples of invalid filenames: `worker.py`, `file.py`, `c.py`
+    Command to run the worker files:
+    python worker.py -ID
+    ex- python worker.py -1
+        python worker.py -2
+        python worker.py -3
 
-    > **Note:** The integer at the end of each filename is used to identify the worker node.
+    > **Note:** The integer at the end of each execute command is used to identify the worker node.
 
-2. **Check if Worker Nodes are Active**
+3. **Check if Worker Nodes are Active**
 
     Run the following command in a separate terminal to check if the worker nodes are responsive:
     ```bash
     python client.py -h
     ```
 
-3. **Send a Task to Worker Nodes**
+4. **Send a Task to Worker Nodes**
 
     To send a task, such as finding simple interest, use the `client.py` script with the following syntax:
     ```bash
@@ -71,7 +74,7 @@ To run this project, ensure you have the following installed:
 
     This example sends a request to find the simple interest. Similarly, you can use `--help` for available tasks.
 
-4. **Check status of a task**
+5. **Check status of a task**
 
    To check status of a task run the following command:
    ```bash
