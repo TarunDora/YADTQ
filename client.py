@@ -48,21 +48,24 @@ def main():
 
     # Send a task
     try:
-        task_id = queue.send_task(comm, params)
-        print(f"Client sent task with ID: {task_id}")
+        for i in range(10):
+            task_id = queue.send_task(comm, params)
+            print(f"Client sent task with ID: {task_id}")
+            time.sleep(1)
         
         # Check task status (done only for demonstration purposes. Can delete the below code if needed)
-        while True:
-            status = queue.get_task_status(task_id)
-            print(f"Task status: {status}")
+        # while True:
+        #     status = queue.get_task_status(task_id)
+        #     print(f"Task status: {status}")
             
-            if status["status"] in ["success", "failed"]:
-                print("Final result:", status)
-                break
-            time.sleep(2)
+        #     if status["status"] in ["success", "failed"]:
+        #         print("Final result:", status)
+        #         break
+        #     time.sleep(2)
     except:
         print("Check if Kafka and Redis servers are running")
         exit()
 
 if __name__ == "__main__":
     main()
+
