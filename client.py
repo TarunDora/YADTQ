@@ -4,6 +4,8 @@ import sys
 import json
 import redis
 
+file_name = "log.txt"
+
 def check_heartbeat(queue):
     status = queue.check_worker_health()
     if len(status): # print if workers are present
@@ -52,7 +54,8 @@ def main():
             task_id = queue.send_task(comm, params)
             print(f"Client sent task with ID: {task_id}")
             time.sleep(1)
-        
+            with open(file_name, "a") as file:  # Append mode to retain previous logs
+                file.write(f"Client sent task with ID: {task_id}\n")
         # Check task status (done only for demonstration purposes. Can delete the below code if needed)
         # while True:
         #     status = queue.get_task_status(task_id)

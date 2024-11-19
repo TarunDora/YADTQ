@@ -3,6 +3,8 @@ import time
 import sys
 import threading
 
+file_name = "log.txt"
+
 def send_heartbeat(worker_id, queue):
     while True:
         queue.redis_client.set(f"worker:{worker_id}:heartbeat", int(time.time()))
@@ -61,15 +63,18 @@ def main():
             
             # Update status to 'processing'
             queue.redis_client.hset(task_id, "status", "processing")
-            
+            print(f'task_id : {task_id} , status : {(queue.get_task_status(task_id)) ["status"]}')
             try:
                 result = process_task(task)
                 queue.redis_client.hmset(task_id, {"status": "success", "result": str(result)})
-                print(f"Task {task_id} completed successfully with result: {result}")
-            
+                print(f"Task {task_id} completed successfully with result: {result} \n")
+                with open(file_name, "a") as file:  
+                    file.write(f"Task {task_id} completed successfully with result: {result} executed by worker:{worker_id} \n")
             except Exception as e:
                 queue.redis_client.hmset(task_id, {"status": "failed", "result": str(e)})
-                print(f"Task {task_id} failed with error: {e}")
+                print(f"Task {task_id} failed with error: {e} \n")
+                with open(file_name, "a") as file:  
+                    file.write(f"Task {task_id} failed with error: {e} \n")
 
     except:
         print("GoodBye!")
