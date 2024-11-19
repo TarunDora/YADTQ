@@ -83,5 +83,16 @@ To run this project, ensure you have the following installed:
    ```bash
     python client.py -s task-*
     ```
+5. **Check logs of each task**
+
+   Upon running client.py, a log.txt file is created in the project directory. This file contains a record of all tasks that have been sent, their outputs, and the worker nodes on which they were executed.
+
+    You can open log.txt to:
+
+    -See all submitted tasks.
+   
+    -Check the outputs of completed tasks.
+   
+    -Identify the worker node responsible for processing each task.
 
 ---
