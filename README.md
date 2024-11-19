@@ -52,10 +52,13 @@ To run this project, ensure you have the following installed:
 
     Command to run the worker files:
     python worker.py -ID
-    ex- python worker.py -1
-        python worker.py -2
-        python worker.py -3
-
+    ex-
+    ```bash
+    python worker.py -1
+    python worker.py -2
+    python worker.py -3
+    ```
+    
     > **Note:** The integer at the end of each execute command is used to identify the worker node.
 
 3. **Check if Worker Nodes are Active**
